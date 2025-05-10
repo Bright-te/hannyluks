@@ -118,6 +118,7 @@
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
+      padding: 30px;
     }
 
     .gallery figure {
@@ -177,7 +178,7 @@
       text-align: center;
       font-size: 20px;
       border-radius: 5px;
-      margin-top: 20px;
+      margin: 20px;
     }
   </style>
 </head>
@@ -197,7 +198,6 @@
       <button class="btn" onclick="showModal('Fascinator Details')">View Details</button>
       <a class="btn" href="https://wa.me/233531580281?text=I would like to book a Fascinator" target="_blank">Book on WhatsApp</a>
     </div>
-  
     <!-- Engagement and Wedding Decor -->
     <div class="service">
       <h3>Engagement and Wedding Decor</h3>
@@ -206,7 +206,6 @@
       <button class="btn" onclick="showModal('Decor Details')">View Details</button>
       <a class="btn" href="https://wa.me/233531580281?text=I would like to book the Decor Activities" target="_blank">Book on WhatsApp</a>
     </div>
-  
     <!-- Makeups -->
     <div class="service">
       <h3>Makeups</h3>
@@ -215,7 +214,6 @@
       <button class="btn" onclick="showModal('Makeup Details')">View Details</button>
       <a class="btn" href="https://wa.me/233531580281?text=I would like to book a Makeup" target="_blank">Book on WhatsApp</a>
     </div>
-  
     <!-- Curtains -->
     <div class="service">
       <h3>Curtains</h3>
@@ -225,7 +223,6 @@
       <a class="btn" href="https://wa.me/233531580281?text=I would like to book Curtains service" target="_blank">Book on WhatsApp</a>
     </div>
   </div>
-  
 
   <div class="gallery">
     <figure>
@@ -245,7 +242,6 @@
       <figcaption>Curtains</figcaption>
     </figure>
   </div>
-  
 
   <div class="testimonials">
     <h2>Customer Testimonials</h2>
@@ -271,8 +267,8 @@
   <footer>
     <p>&copy; 2025 HANNYLUKS MAKEUP AND DECORATION | All Rights Reserved</p>
     <p>Follow us on: 
-      <a href="https://facebook.com/BrightOwusuAgyapong" target="_blank">Facebook</a> | 
-      <a href="https://instagram.com/bright442025" target="_blank">Instagram</a>
+      <a href="https://facebook.com/HannahOforiAgyapong" target="_blank">Facebook</a> | 
+      <a href="https://instagram.com/hannyluksdeco" target="_blank">Instagram</a>
     </p>
   </footer>
 
@@ -281,6 +277,43 @@
     <div class="modal-content">
       <span onclick="closeModal()" style="font-size: 30px; cursor: pointer;">&times;</span>
       <h2 id="modalTitle"></h2>
-      <p>Details about the service will go here.</p>
+      <p>We will give you the best service of all.</p>
     </div>
-  </div
+  </div>
+
+  <script>
+    function showModal(title) {
+      document.getElementById("modalTitle").innerText = title;
+      document.getElementById("serviceModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("serviceModal").style.display = "none";
+    }
+
+    // Countdown Timer
+    const countdownElement = document.getElementById("countdown");
+    const nextBooking = new Date("2025-06-01T09:00:00");
+
+    function updateCountdown() {
+      const now = new Date();
+      const timeLeft = nextBooking - now;
+
+      if (timeLeft <= 0) {
+        countdownElement.innerText = "We are currently available!";
+        return;
+      }
+
+      const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+      const seconds = Math.floor((timeLeft / 1000) % 60);
+
+      countdownElement.innerText = `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+
+</body>
+</html>
