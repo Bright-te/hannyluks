@@ -181,6 +181,36 @@
       border-radius: 5px;
       margin: 20px;
     }
+
+    /* Floating WhatsApp Button */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      font-size: 24px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    /* Modal Close Button */
+    .close-btn {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -228,7 +258,7 @@
       <h3>Floral Works(Bouquet)</h3>
       <p class="reviews">Review: The bouquet was elegant and fresh—just perfect!</p>
       <p class="price">Price: It depends on the type of flowers and arrangement.</p>
-      <button class="btn" onclick="showModal('Curtain Details')">View Details</button>
+      <button class="btn" onclick="showModal('Floral Works Details')">View Details</button>
       <a class="btn" href="https://wa.me/233246325207?text=I would like to book a Floral Bouquet" target="_blank">Book on WhatsApp</a>
     </div>
   </div>
@@ -288,16 +318,31 @@
   <!-- Modal -->
   <div id="serviceModal" class="modal">
     <div class="modal-content">
-      <span onclick="closeModal()" style="font-size: 30px; cursor: pointer;">&times;</span>
+      <span class="close-btn" onclick="closeModal()">×</span>
       <h2 id="modalTitle"></h2>
-      <p>We will give you the best service of all above your expectations.</p>
+      <p id="modalDetails"></p>
     </div>
   </div>
 
   <script>
-    function showModal(title) {
-      document.getElementById("modalTitle").innerText = title;
+    function showModal(service) {
       document.getElementById("serviceModal").style.display = "block";
+      if (service === 'Fascinator Details') {
+        document.getElementById("modalTitle").innerText = "Fascinator Details";
+        document.getElementById("modalDetails").innerText = "Our fascinators are available in various styles, from elegant to trendy, perfect for weddings, engagements, and other special events. Custom designs are available upon request.";
+      } else if (service === 'Decor Details') {
+        document.getElementById("modalTitle").innerText = "Engagement & Wedding Decor Details";
+        document.getElementById("modalDetails").innerText = "We provide exquisite engagement and wedding decorations that cater to your theme and preferences. Our team ensures every detail is meticulously planned for a beautiful atmosphere.";
+      } else if (service === 'Makeup Details') {
+        document.getElementById("modalTitle").innerText = "Makeup Details";
+        document.getElementById("modalDetails").innerText = "Our professional makeup artists provide flawless, long-lasting makeup that enhances your natural beauty for events like weddings, photoshoots, and more.";
+      } else if (service === 'Curtain Details') {
+        document.getElementById("modalTitle").innerText = "Curtains Details";
+        document.getElementById("modalDetails").innerText = "We provide high-quality curtains that come in various fabrics and styles, perfect for any room in your home or office. Let us help transform your space!";
+      } else if (service === 'Floral Works Details') {
+        document.getElementById("modalTitle").innerText = "Floral Works (Bouquet) Details";
+        document.getElementById("modalDetails").innerText = "Our floral arrangements include beautifully designed bouquets perfect for weddings, events, and gifts. We offer both seasonal and custom flower options.";
+      }
     }
 
     function closeModal() {
@@ -305,28 +350,29 @@
     }
 
     // Countdown Timer
-    const countdownElement = document.getElementById("countdown");
-    const nextBooking = new Date("2025-06-01T09:00:00");
+    var countdownDate = new Date();
+    countdownDate.setHours(17, 0, 0);  // Set to 5:00 PM
+    countdownDate.setSeconds(0);
 
-    function updateCountdown() {
-      const now = new Date();
-      const timeLeft = nextBooking - now;
+    var x = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = countdownDate - now;
 
-      if (timeLeft <= 0) {
-        countdownElement.innerText = "We are currently available!";
-        return;
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+      document.getElementById("countdown").innerHTML = hours + "h " + minutes + "m ";
+
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "Time to book your next event!";
       }
-
-      const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
-      const seconds = Math.floor((timeLeft / 1000) % 60);
-
-      countdownElement.innerText = `${hours}h ${minutes}m ${seconds}s`;
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    }, 1000);
   </script>
+
+  <div class="whatsapp-btn">
+    <a href="https://wa.me/233246325207" target="_blank">📞</a>
+  </div>
 
 </body>
 </html>
